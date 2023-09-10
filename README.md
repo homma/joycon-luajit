@@ -1,5 +1,4 @@
 
 #### About
 
-accessing Joy-Conf from LuaJIT
-
+accessing Joy-Con from LuaJIT
