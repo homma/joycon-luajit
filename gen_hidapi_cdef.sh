@@ -17,7 +17,8 @@ HIDAPI_INCLUDE=$(brew --prefix hidapi)/include/hidapi
 # umbrella header file
 TARGET=hidapi_umbrella.h
 
-OUTPUT=hidapi.cdef
+mkdir -p ext
+OUTPUT=ext/hidapi.cdef
 
 # generates cdefs from header files
 clang -cc1 -ast-print \

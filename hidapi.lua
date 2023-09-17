@@ -4,7 +4,7 @@ local hidapi
 
 local init_ffi = function()
   -- initialize ffi
-  local f = io.open('hidapi.cdef', 'r')
+  local f = io.open('ext/hidapi.cdef', 'r')
   local cdefs = f:read 'a'
   ffi.cdef(cdefs)
 
