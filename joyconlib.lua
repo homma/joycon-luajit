@@ -7,6 +7,12 @@ local M = {}
 -- Joy-Con (L)
 M.vendor_id_l = 1406
 M.product_id_l = 8198
+M.x_default_l = 350
+M.z_default_l = 4081
+
+-- Joy-Con (R)
+M.x_default_r = 350
+M.z_default_r = -4081
 
 -- global packet number
 local _global_packet_number = 0
@@ -101,42 +107,59 @@ M.get_accel_x = function(buf)
   b0 = buf[13]
   b1 = buf[14]
 
-  return bit.bor(bit.lshift(b1, 8), b0)
+  local raw = bit.bor(bit.lshift(b1, 8), b0)
+  -- to uint16 : -32768 ~ 32767
+  local result = (raw <= 32767) and raw or raw - 65536
+  -- L
+  result = result - M.x_default_l
+  return result
 end
 
 M.get_accel_y = function(buf)
   b0 = buf[15]
   b1 = buf[16]
 
-  return bit.bor(bit.lshift(b1, 8), b0)
+  local raw = bit.bor(bit.lshift(b1, 8), b0)
+  local result = (raw <= 32767) and raw or raw - 65536
+  return result
 end
 
 M.get_accel_z = function(buf)
   b0 = buf[17]
   b1 = buf[18]
 
-  return bit.bor(bit.lshift(b1, 8), b0)
+  local raw = bit.bor(bit.lshift(b1, 8), b0)
+  local result = (raw <= 32767) and raw or raw - 65536
+  -- L
+  result = result - M.z_default_l
+  return result
 end
 
 M.get_gyro_1 = function(buf)
   b0 = buf[19]
   b1 = buf[20]
 
-  return bit.bor(bit.lshift(b1, 8), b0)
+  local raw = bit.bor(bit.lshift(b1, 8), b0)
+  local result = (raw <= 32767) and raw or raw - 65536
+  return result
 end
 
 M.get_gyro_2 = function(buf)
   b0 = buf[21]
   b1 = buf[22]
 
-  return bit.bor(bit.lshift(b1, 8), b0)
+  local raw = bit.bor(bit.lshift(b1, 8), b0)
+  local result = (raw <= 32767) and raw or raw - 65536
+  return result
 end
 
 M.get_gyro_3 = function(buf)
   b0 = buf[23]
   b1 = buf[24]
 
-  return bit.bor(bit.lshift(b1, 8), b0)
+  local raw = bit.bor(bit.lshift(b1, 8), b0)
+  local result = (raw <= 32767) and raw or raw - 65536
+  return result
 end
 
 M.print_imu = function(buf)

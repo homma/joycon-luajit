@@ -41,12 +41,12 @@ win.title = 'My Raylib Window'
 
 local draw = function(buf)
 
-  local ax = joycon.get_accel_x(buf) / 65536
-  local ay = joycon.get_accel_y(buf) / 65536
-  local az = joycon.get_accel_z(buf) / 65536
-  local g1 = joycon.get_gyro_1(buf) / 65536
-  local g2 = joycon.get_gyro_2(buf) / 65536
-  local g3 = joycon.get_gyro_3(buf) / 65536
+  local ax = (joycon.get_accel_x(buf) + 32768) / 65536
+  local ay = (joycon.get_accel_y(buf) + 32768) / 65536
+  local az = (joycon.get_accel_z(buf) + 32768) / 65536
+  local g1 = (joycon.get_gyro_1(buf) + 32768) / 65536
+  local g2 = (joycon.get_gyro_2(buf) + 32768) / 65536
+  local g3 = (joycon.get_gyro_3(buf) + 32768) / 65536
 
   rl.BeginDrawing()
   rl.ClearBackground(rlcolor.RAYWHITE)
@@ -63,7 +63,7 @@ local draw = function(buf)
   local h = base.h * ax
   rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
 
-  local x = base.x
+  local x = base.x + 20
   local y = base.y + base.h + 10
   local h = 30
   local c = rlcolor.GRAY
@@ -76,7 +76,7 @@ local draw = function(buf)
   local h = base.h * ay
   rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
 
-  local x = base.x + base.w / 6 * 1
+  local x = base.x + base.w / 6 * 1 + 20
   local y = base.y + base.h + 10
   local h = 30
   local c = rlcolor.GRAY
@@ -89,7 +89,7 @@ local draw = function(buf)
   local h = base.h * az
   rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
 
-  local x = base.x + base.w / 6 * 2
+  local x = base.x + base.w / 6 * 2 + 20
   local y = base.y + base.h + 10
   local h = 30
   local c = rlcolor.GRAY
@@ -102,7 +102,7 @@ local draw = function(buf)
   local h = base.h * g1
   rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
 
-  local x = base.x + base.w / 6 * 3
+  local x = base.x + base.w / 6 * 3 + 20
   local y = base.y + base.h + 10
   local h = 30
   local c = rlcolor.GRAY
@@ -115,7 +115,7 @@ local draw = function(buf)
   local h = base.h * g2
   rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
 
-  local x = base.x + base.w / 6 * 4
+  local x = base.x + base.w / 6 * 4 + 20
   local y = base.y + base.h + 10
   local h = 30
   local c = rlcolor.GRAY
@@ -128,7 +128,7 @@ local draw = function(buf)
   local h = base.h * g3
   rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
 
-  local x = base.x + base.w / 6 * 5
+  local x = base.x + base.w / 6 * 5 + 20
   local y = base.y + base.h + 10
   local h = 30
   local c = rlcolor.GRAY
@@ -152,7 +152,7 @@ local main = function()
     if 0 ~= hidapi.hid_read(dev, rbuf.buf, rbuf.length) then
       draw(rbuf.buf)
     end
-    ffi.C.usleep(100 * 1000)
+    ffi.C.usleep(10 * 1000)
   end
 
   rl.CloseWindow()
