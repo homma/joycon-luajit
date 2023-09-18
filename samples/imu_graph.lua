@@ -152,7 +152,7 @@ local main = function()
     if 0 ~= hidapi.hid_read(dev, rbuf.buf, rbuf.length) then
       draw(rbuf.buf)
     end
-    ffi.C.usleep(10 * 1000)
+    -- ffi.C.usleep(10 * 1000)
   end
 
   rl.CloseWindow()
