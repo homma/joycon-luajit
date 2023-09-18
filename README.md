@@ -1,7 +1,7 @@
 
 #### About
 
-accessing Joy-Con from LuaJIT
+Using Joy-Con from LuaJIT on macOS
 
 #### Usage
 
