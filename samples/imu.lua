@@ -1,6 +1,6 @@
-local hidapi = require 'hidapi'
-local hidlib = require 'hidlib'
-local joycon = require 'joycon'
+local hidapi = require 'hidapi.hidapi'
+local hidlib = require 'hidapi.hidlib'
+local joycon = require 'joyconlib'
 local ffi = require 'ffi'
 
 local init_c = function()

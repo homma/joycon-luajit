@@ -1,5 +1,5 @@
-local hidapi = require 'hidapi'
-local hidlib = require 'hidlib'
+local hidapi = require 'hidapi.hidapi'
+local hidlib = require 'hidapi.hidlib'
 local bit = require 'bit'
 
 local M = {}
