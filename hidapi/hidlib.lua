@@ -6,6 +6,7 @@ local init_c = function()
   -- additional libc function
   ffi.cdef [[
     size_t wcstombs(char * dest, const wchar_t * src, size_t n);
+    void bzero(void *s, size_t n);
   ]]
 end
 
@@ -13,10 +14,42 @@ local init_module = function()
   init_c()
 end
 
+-- char buffer
 M.create_char_buffer = function(size)
   return ffi.new('char[?]', size)
 end
 
+-- unsigned char buffer
+local UCharBuffer = {}
+
+function UCharBuffer:new(size)
+  local obj = {}
+  obj.length = size
+  obj.buf = ffi.new('unsigned char[?]', size)
+
+  setmetatable(obj, self)
+  self.__index = self
+
+  return obj
+end
+
+function UCharBuffer:bzero()
+  ffi.C.bzero(self.buf, self.length)
+end
+
+function UCharBuffer:hex_print()
+  local str = ''
+  for i = 0, self.length do
+    str = str .. string.format('%02X ', self.buf[i])
+  end
+  print(str)
+end
+
+M.create_uchar_buffer = function(size)
+  return UCharBuffer:new(size)
+end
+
+-- wchar buffer
 M.create_wchar_buffer = function(size)
   return ffi.new('wchar_t[?]', size)
 end
