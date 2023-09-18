@@ -3,7 +3,14 @@
 
 accessing Joy-Con from LuaJIT
 
+#### Usage
+
+````
+$ luajit samples/imu_graph.lua
+````
+
 #### Licenses
 
-- `LICENSE.hidapi-luajit` except files generated under ext/ directory.
-- `LICENSE.hidapi` for generated ext/hidapi.cdef file.
+- read `hidapi/README.md` for files under `hidapi` directory
+- read `raylib/README.md` for files under `raylib` directory
+- `LICENSE.joycon-luajit` for other files
