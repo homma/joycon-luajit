@@ -183,10 +183,12 @@ M.print_imu = function(buf)
   )
 end
 
+-- accel: raw to g
 M.raw_to_g = function(raw)
   return raw * 0.000244
 end
 
+-- gyro: raw to degree per second
 M.raw_to_dps = function()
   return raw * 0.07
 end
