@@ -183,4 +183,12 @@ M.print_imu = function(buf)
   )
 end
 
+M.raw_to_g = function(raw)
+  return raw * 0.000244
+end
+
+M.raw_to_dps = function()
+  return raw * 0.07
+end
+
 return M
