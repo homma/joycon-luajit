@@ -141,6 +141,9 @@ end
 local main = function()
   rl.InitWindow(win.w, win.h, win.title)
 
+  -- 60 FPS
+  rl.SetTargetFPS(60)
+
   local dev = init_joycon()
 
   -- read buffer
@@ -152,7 +155,6 @@ local main = function()
     if 0 ~= hidapi.hid_read(dev, rbuf.buf, rbuf.length) then
       draw(rbuf.buf)
     end
-    -- ffi.C.usleep(10 * 1000)
   end
 
   rl.CloseWindow()
