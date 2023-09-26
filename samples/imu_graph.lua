@@ -40,7 +40,6 @@ win.h = 400
 win.title = 'My Raylib Window'
 
 local draw = function(buf)
-
   local ax = (joycon.get_accel_x(buf) + 32768) / 65536
   local ay = (joycon.get_accel_y(buf) + 32768) / 65536
   local az = (joycon.get_accel_z(buf) + 32768) / 65536
@@ -54,86 +53,61 @@ local draw = function(buf)
   base = {}
   base.y = 30
   base.x = 30
-  base.w = win.w - base.y * 2  -- 560
-  base.h = win.h - base.x * 2  - 30 -- 360
+  base.w = win.w - base.y * 2 -- 560
+  base.h = win.h - base.x * 2 - 30 -- 360
 
+  local draw_bar = function(x, val, name)
+    -- draw bar
+    local x = x
+    local y = base.y + base.h * (1 - val)
+    local w = base.w / 6 * 0.8
+    local h = base.h * val
+    rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
+
+    -- draw label
+    local x = x + 20
+    local y = base.y + base.h + 10
+    local h = 30
+    local c = rlcolor.GRAY
+    local t = name
+    rl.DrawText(t, x, y, h, c)
+  end
+
+  -- ax
   local x = base.x
-  local y = base.y + base.h * (1 - ax)
-  local w = base.w / 6 * 0.8
-  local h = base.h * ax
-  rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
+  local val = ax
+  local name = 'ax'
+  draw_bar(x, val, name)
 
-  local x = base.x + 20
-  local y = base.y + base.h + 10
-  local h = 30
-  local c = rlcolor.GRAY
-  local t = 'ax'
-  rl.DrawText(t, x, y, h, c)
-
+  -- ay
   local x = base.x + base.w / 6 * 1
-  local y = base.y + base.h * (1 - ay)
-  local w = base.w / 6 * 0.8
-  local h = base.h * ay
-  rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
+  local val = ay
+  local name = 'ay'
+  draw_bar(x, val, name)
 
-  local x = base.x + base.w / 6 * 1 + 20
-  local y = base.y + base.h + 10
-  local h = 30
-  local c = rlcolor.GRAY
-  local t = 'ay'
-  rl.DrawText(t, x, y, h, c)
-
+  -- az
   local x = base.x + base.w / 6 * 2
-  local y = base.y + base.h * (1 - az)
-  local w = base.w / 6 * 0.8
-  local h = base.h * az
-  rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
+  local val = az
+  local name = 'az'
+  draw_bar(x, val, name)
 
-  local x = base.x + base.w / 6 * 2 + 20
-  local y = base.y + base.h + 10
-  local h = 30
-  local c = rlcolor.GRAY
-  local t = 'az'
-  rl.DrawText(t, x, y, h, c)
-
+  -- g1
   local x = base.x + base.w / 6 * 3
-  local y = base.y + base.h * (1 - g1)
-  local w = base.w / 6 * 0.8
-  local h = base.h * g1
-  rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
+  local val = g1
+  local name = 'g1'
+  draw_bar(x, val, name)
 
-  local x = base.x + base.w / 6 * 3 + 20
-  local y = base.y + base.h + 10
-  local h = 30
-  local c = rlcolor.GRAY
-  local t = 'g1'
-  rl.DrawText(t, x, y, h, c)
-
+  -- g2
   local x = base.x + base.w / 6 * 4
-  local y = base.y + base.h * (1 - g2)
-  local w = base.w / 6 * 0.8
-  local h = base.h * g2
-  rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
+  local val = g2
+  local name = 'g2'
+  draw_bar(x, val, name)
 
-  local x = base.x + base.w / 6 * 4 + 20
-  local y = base.y + base.h + 10
-  local h = 30
-  local c = rlcolor.GRAY
-  local t = 'g2'
-  rl.DrawText(t, x, y, h, c)
-
+  -- g3
   local x = base.x + base.w / 6 * 5
-  local y = base.y + base.h * (1 - g3)
-  local w = base.w / 6 * 0.8
-  local h = base.h * g3
-  rl.DrawRectangle(x, y, w, h, rlcolor.BLUE)
-
-  local x = base.x + base.w / 6 * 5 + 20
-  local y = base.y + base.h + 10
-  local h = 30
-  local c = rlcolor.GRAY
-  local t = 'g3'
-  rl.DrawText(t, x, y, h, c)
+  local val = g3
+  local name = 'g3'
+  draw_bar(x, val, name)
 
   rl.EndDrawing()
 end
