@@ -118,7 +118,7 @@ local draw = function(buf)
   base.y = 30
   base.x = 30
   base.w = win.w - base.y * 2
-  base.h = win.h - base.x * 2 - 30
+  base.h = win.h - base.x * 2
 
   draw_chart(base.x, base.y, base.w, base.h)
 
