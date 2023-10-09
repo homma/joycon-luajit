@@ -53,7 +53,7 @@ local q_max_length = fps * duration
 
 local insert_queue = function(queue, value)
   table.insert(queue, value)
-  if(#queue > q_max_length) then
+  if #queue > q_max_length then
     table.remove(queue, 1)
   end
 end
@@ -65,12 +65,28 @@ end
 local draw_chart = function(base_x, base_y, base_w, base_h)
   rl.DrawRectangleLines(base_x, base_y, base_w, base_h, rlcolor.BLACK)
 
+  local draw_guideline = function(value, color)
+    local x1 = base_x
+    local x2 = base_x + base_w
+
+    local y = base_y + base_h * (1 - value)
+    rl.DrawLine(x1, y, x2, y, color)
+  end
+
+  draw_guideline(raw_to_percent(30000), rlcolor.LIGHTGRAY)
+  draw_guideline(raw_to_percent(20000), rlcolor.LIGHTGRAY)
+  draw_guideline(raw_to_percent(10000), rlcolor.LIGHTGRAY)
+  draw_guideline(raw_to_percent(0), rlcolor.LIGHTGRAY)
+  draw_guideline(raw_to_percent(-10000), rlcolor.LIGHTGRAY)
+  draw_guideline(raw_to_percent(-20000), rlcolor.LIGHTGRAY)
+  draw_guideline(raw_to_percent(-30000), rlcolor.LIGHTGRAY)
+
   local draw_lines = function(queue, color)
     local width = base_w / q_max_length
     local prev_x = base_x
     local cur_x = base_x + width
 
-    for i,v in pairs(queue) do
+    for i, v in pairs(queue) do
       local prev = 0
       if i ~= 1 then
         prev = queue[i - 1]
@@ -84,7 +100,6 @@ local draw_chart = function(base_x, base_y, base_w, base_h)
       prev_x = cur_x
       cur_x = cur_x + width
     end
-
   end
 
   draw_lines(axq, rlcolor.BLUE)
@@ -93,7 +108,6 @@ local draw_chart = function(base_x, base_y, base_w, base_h)
   draw_lines(g1q, rlcolor.MAGENTA)
   draw_lines(g2q, rlcolor.PINK)
   draw_lines(g3q, rlcolor.ORANGE)
-
 end
 
 local draw = function(buf)
