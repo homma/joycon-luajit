@@ -37,7 +37,7 @@ local main = function()
     if 0 ~= hidapi.hid_read(dev, rbuf.buf, rbuf.length) then
       joycon.print_imu(rbuf.buf)
     end
-    ffi.C.usleep(100 * 1000)
+    ffi.C.usleep(1000 * 1000 / 60)
   end
 end
 

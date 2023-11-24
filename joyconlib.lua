@@ -11,6 +11,8 @@ M.x_default_l = 350
 M.z_default_l = 4081
 
 -- Joy-Con (R)
+M.vendor_id_r = 1406
+M.product_id_r = 8199
 M.x_default_r = 350
 M.z_default_r = -4081
 
